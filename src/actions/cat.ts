@@ -1,6 +1,7 @@
 import { Dispatch } from 'redux';
 
 import catAPI from '../apis/catApi';
+import { catMapper } from '../mappers/catsMapper';
 import { ActionTypes, Cat } from './';
 
 export interface SetCatAction {
@@ -22,24 +23,7 @@ export const setCat = (cat: Cat) => {
 export const getCat = (catId: string) => async (dispatch: Dispatch) => {
   if (!catId) return;
   const catResponse = await catAPI.get<Cat>(`/images/${catId}`, {
-    transformResponse: [
-      (data: string) => {
-        const parsedData = JSON.parse(data);
-        const { id, url, height, width, breeds } = parsedData;
-        const { name, origin, temperament, description } = breeds[0];
-
-        return {
-          id,
-          url,
-          height,
-          width,
-          name,
-          origin,
-          temperament,
-          description,
-        };
-      },
-    ],
+    transformResponse: [catMapper],
   });
   dispatch<GetCatAction>({
     type: ActionTypes.getCat,
