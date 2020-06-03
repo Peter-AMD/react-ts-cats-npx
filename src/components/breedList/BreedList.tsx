@@ -29,16 +29,16 @@ export const _BreedList: React.FC<Props> = ({
     setCurrentPage(1);
     setSeeMore(true);
     if (breed) fetchCats(breed.id, 1);
-  }, [breed]);
+  }, [breed, fetchCats]);
 
   useEffect(() => {
-    setNoOfCats(cats.length);
     if (noOfCats === cats.length && cats.length !== 0) setSeeMore(false);
-  }, [currentPage, cats]);
+  }, [currentPage, cats, noOfCats]);
   const getMoreCats = () => {
     const nextPage = currentPage + 1;
     fetchCats(breed.id, nextPage);
     setCurrentPage(nextPage);
+    setNoOfCats(cats.length);
   };
   const onViewDetailsHandler = (cat: Cat) => {
     setCat(cat);
@@ -47,13 +47,20 @@ export const _BreedList: React.FC<Props> = ({
   const renderCats: JSX.Element[] = cats.map((cat: Cat) => (
     <Card key={cat.id} style={{ width: '18rem' }}>
       <Card.Img variant="top" src={cat.url} />
-      <Button
-        style={{ position: 'absolute', bottom: '1px', width: '100%' }}
-        variant="primary"
-        onClick={() => onViewDetailsHandler(cat)}
-      >
-        View Details
-      </Button>
+      <div style={{ height: '78px' }}>
+        <Button
+          style={{
+            position: 'absolute',
+            bottom: '1px',
+            width: '80%',
+            margin: '20px',
+          }}
+          variant="primary"
+          onClick={() => onViewDetailsHandler(cat)}
+        >
+          View Details
+        </Button>
+      </div>
     </Card>
   ));
   return (
@@ -62,18 +69,20 @@ export const _BreedList: React.FC<Props> = ({
         className="cats-list-wrapper"
         style={{
           display: 'grid',
-          gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr',
+          gridTemplateColumns: '1fr 1fr 1fr 1fr',
+          gridColumnGap: '30px',
+          gridRowGap: '90px',
         }}
       >
         {cats.length ? renderCats : ''}
       </div>
       {cats.length && seeMore ? (
         <Button
-          style={{ margin: '30px auto', display: 'grid', width: '50%' }}
-          variant="outline-dark"
+          style={{ marginTop: '20px' }}
+          variant="success"
           onClick={() => getMoreCats()}
         >
-          See more
+          Load more
         </Button>
       ) : (
         ''

@@ -42,7 +42,7 @@ const _BreedDropdown: React.FC<Props> = ({
 
   return (
     <React.Fragment>
-      <h3>Breed dropdown</h3>
+      <p style={{ margin: '10px 0' }}>Breed</p>
       <div className="breed-dropdown-wrapper">
         <DropdownButton id="breed-list" title={breed.name || 'Select Breed'}>
           {breeds.length ? renderItem : renderLoader}

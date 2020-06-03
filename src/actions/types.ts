@@ -3,5 +3,6 @@ export enum ActionTypes {
   selectBreed,
   fetchCats,
   setCat,
+  getCat,
   clearCats,
 }

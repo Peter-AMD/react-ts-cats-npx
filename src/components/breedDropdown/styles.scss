@@ -1,5 +1,22 @@
 .breed-dropdown-wrapper {
-  > .show.dropdown {
+  margin-bottom: 30px;
+  > .dropdown {
+    > #breed-list {
+      position: relative;
+      color: #000;
+      background: #fff;
+      border-color: #ced4da;
+      width: 200px;
+      text-align: left;
+
+      &::after {
+        margin-left: 0;
+        position: absolute;
+        right: 9px;
+        top: 15px;
+        color: #495057;
+      }
+    }
     > .dropdown-menu.show {
       height: 300px;
       overflow-y: scroll;
