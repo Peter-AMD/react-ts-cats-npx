@@ -1,0 +1,14 @@
+.breed-dropdown-wrapper {
+  > .show.dropdown {
+    > .dropdown-menu.show {
+      height: 300px;
+      overflow-y: scroll;
+      display: grid;
+
+      > .spinner-grow {
+        align-self: center;
+        justify-self: center;
+      }
+    }
+  }
+}
